@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{8C8A4F80-7711-4AE3-B0D0-9819E613BEE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Contracts", "Service.Contracts\Service.Contracts.csproj", "{EFD59731-AB7C-4C8E-A152-53CEC83CE923}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{CE404331-78F7-49D3-BE77-2C6328F21A10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{8C8A4F80-7711-4AE3-B0D0-9819E613BEE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8A4F80-7711-4AE3-B0D0-9819E613BEE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8A4F80-7711-4AE3-B0D0-9819E613BEE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD59731-AB7C-4C8E-A152-53CEC83CE923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD59731-AB7C-4C8E-A152-53CEC83CE923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD59731-AB7C-4C8E-A152-53CEC83CE923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD59731-AB7C-4C8E-A152-53CEC83CE923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE404331-78F7-49D3-BE77-2C6328F21A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE404331-78F7-49D3-BE77-2C6328F21A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE404331-78F7-49D3-BE77-2C6328F21A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE404331-78F7-49D3-BE77-2C6328F21A10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
