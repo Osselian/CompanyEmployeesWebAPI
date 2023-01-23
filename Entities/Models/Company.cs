@@ -14,7 +14,7 @@ namespace Entities.Models
 
         [Required(ErrorMessage = "Company addres is a required field")]
         [MaxLength(60, ErrorMessage = "Max length for the Addres is 60 characters")]
-        public string? Addres { get; set; }
+        public string? Address { get; set; }
 
         public string? Country { get; set; }
 
