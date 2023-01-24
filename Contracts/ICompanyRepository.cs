@@ -4,6 +4,6 @@ namespace Contracts
 {
     public interface ICompanyRepository
     {
-        IEnumerable<Company>
+        IEnumerable<Company> GetAllCompanies(bool trackChanges);
     }
 }
