@@ -12,10 +12,17 @@ namespace CompanyEmployees.Presentation.Controllers
         public EmployeesController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GerEmployeesForCompany(Guid companyId)
+        public IActionResult GetEmployeesForCompany(Guid companyId)
         {
             var employees = _service.EmployeeService.GetEmployees(companyId, trackChange: false);
-            return Ok(employees);   
+            return Ok(employees);
+        }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetEmployeeForCompany(Guid companyId, Guid id) 
+        {
+            var employee = _service.EmployeeService.GetEmployee(companyId, id, trackChange: false);
+            return Ok(employee);
         }
     }
 }
