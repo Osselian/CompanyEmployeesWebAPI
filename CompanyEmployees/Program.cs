@@ -1,4 +1,5 @@
 using CompanyEmployees.Extensions;
+using CompanyEmployees.Presentation;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
@@ -19,8 +20,10 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable= true;
-}).AddXmlDataContractSerializerFormatters()
-    .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
+})
+    .AddXmlDataContractSerializerFormatters()
+    .AddCustomCsvFormatter()
+    .AddApplicationPart(typeof(AssemblyReference).Assembly);
 
 var app = builder.Build();
 
