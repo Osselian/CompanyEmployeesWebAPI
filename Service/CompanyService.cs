@@ -20,7 +20,6 @@ namespace Service
             _mapper = mapper;
         }
 
-
         public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
         {
                 var companies = _repository.Company.GetAllCompanies(trackChanges);
@@ -52,6 +51,7 @@ namespace Service
         public IEnumerable<CompanyDto> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
         {
             if (ids is null)
+                
                 throw new IdParametersBadRequestException();
 
             var companyEntities = _repository.Company.GetByIds(ids, trackChanges);
@@ -81,6 +81,17 @@ namespace Service
             var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
 
             return (companies: companyCollectionToReturn, ids: ids);
+        }
+
+        public void DeleteCompany(Guid companyId, bool trackChanges)
+        {
+            var company = 
+                _repository.Company.GetCompany(companyId, trackChanges);
+            if (company is null)
+                throw new CompanyNotFoundException(companyId);
+
+            _repository.Company.DeleteCompany(company);
+            _repository.Save();
         }
     }
 }
