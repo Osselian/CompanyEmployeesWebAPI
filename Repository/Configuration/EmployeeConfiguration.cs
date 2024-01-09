@@ -35,6 +35,11 @@ namespace Repository.Configuration
                         CompanyId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
                     }
                 );
+
+            builder
+                .HasOne(e => e.Company)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
