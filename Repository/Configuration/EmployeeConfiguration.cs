@@ -36,10 +36,10 @@ namespace Repository.Configuration
                     }
                 );
 
-            builder
-                .HasOne(e => e.Company)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder
+            //    .HasOne(e => e.Company)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
