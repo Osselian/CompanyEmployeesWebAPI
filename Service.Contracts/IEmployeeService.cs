@@ -17,5 +17,12 @@ namespace Service.Contracts
             Guid companyId, 
             Guid id, 
             bool trackChanges);
+
+        void UpdateEmployeeForCompany(
+            Guid companyId,
+            Guid id,
+            EmployeeForUpdateDto employeeForUpdate,
+            bool compTrackChange,
+            bool empTrackChanges);
     }
 }

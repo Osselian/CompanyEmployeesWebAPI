@@ -24,6 +24,7 @@ namespace Repository
             _repositoryContext.Set<T>()
                 .Where(expression);
 
+
         public void Create(T entity) => _repositoryContext.Set<T>().Add(entity);
 
         public void Delete(T entity) => _repositoryContext?.Set<T>().Remove(entity);
