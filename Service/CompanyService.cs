@@ -13,7 +13,10 @@ namespace Service
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public CompanyService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+        public CompanyService(
+            IRepositoryManager repository, 
+            ILoggerManager logger, 
+            IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
@@ -48,7 +51,9 @@ namespace Service
             return companyToReturn;
         }
 
-        public IEnumerable<CompanyDto> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        public IEnumerable<CompanyDto> GetByIds(
+            IEnumerable<Guid> ids, 
+            bool trackChanges)
         {
             if (ids is null)
                 
@@ -58,7 +63,8 @@ namespace Service
             if (ids.Count() != companyEntities.Count())
                 throw new CollectionByIdsBadRequestException();
 
-            var companiesToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
+            var companiesToReturn = 
+                _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
 
             return companiesToReturn;
         }
@@ -69,7 +75,8 @@ namespace Service
             if (companyCollection is null)
                 throw new CompanyCollectionBadRequest();
 
-            var companyEntities = _mapper.Map<IEnumerable<Company>>(companyCollection);
+            var companyEntities = 
+                _mapper.Map<IEnumerable<Company>>(companyCollection);
             foreach (var company in companyEntities)
             {
                 _repository.Company.CreateCompany(company);    
@@ -92,6 +99,20 @@ namespace Service
                 throw new CompanyNotFoundException(companyId);
 
             _repository.Company.DeleteCompany(company);
+            _repository.Save();
+        }
+
+        public void UpdateCompany(
+            Guid companyId, 
+            CompanyForUpdateDto companyForUpdate, 
+            bool trackChanges)
+        {
+            var companyEntity = 
+                _repository.Company.GetCompany(companyId, trackChanges);
+            if (companyEntity is null)
+                throw new CompanyNotFoundException(companyId);
+
+            _mapper.Map(companyForUpdate, companyEntity);
             _repository.Save();
         }
     }
