@@ -1,4 +1,5 @@
-﻿using Shared.DataTranferObjects;
+﻿using Entities.Models;
+using Shared.DataTranferObjects;
 
 namespace Service.Contracts
 {
@@ -24,5 +25,16 @@ namespace Service.Contracts
             EmployeeForUpdateDto employeeForUpdate,
             bool compTrackChange,
             bool empTrackChanges);
+
+        (EmployeeForUpdateDto employeeToPatch, Employee employeeEntity) 
+            GetEmployeeForPatch(
+                Guid companyId,
+                Guid id,
+                bool compTrackChanges,
+                bool empTrackChanges);
+
+        void SaveChangesForPatch(
+            EmployeeForUpdateDto employeeToPatch,
+            Employee employeeEntity);
     }
 }
