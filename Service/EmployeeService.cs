@@ -34,7 +34,8 @@ namespace Service
             return employeeDto;
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(
+        public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> 
+            GetEmployeesAsync(
             Guid companyId, 
             EmployeeParameters employeeParameters, 
             bool trackChange)
@@ -45,7 +46,7 @@ namespace Service
                 .GetEmployeesAsync(companyId, employeeParameters,trackChange);
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
 
-            return employeesDto;
+            return (employees: employeesDto, metaData: employeesFromDb.MetaData);
         }
 
         public async Task<EmployeeDto> CreateEmployeeForCompanyAsync(

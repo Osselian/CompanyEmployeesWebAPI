@@ -16,13 +16,22 @@ namespace Repository
                 trackChange)
             .SingleOrDefaultAsync(); 
 
-        public async Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId,
-            EmployeeParameters employeeParameters, bool trackChange) =>
-            await FindByCondition(e => e.CompanyId.Equals(companyId), trackChange)
+        public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId,
+            EmployeeParameters employeeParameters, bool trackChange)
+        {
+            var employees = await 
+                FindByCondition(e => e.CompanyId.Equals(companyId), trackChange)
             .OrderBy(e => e.Name)
             .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
             .Take(employeeParameters.PageSize)
             .ToListAsync();
+
+            var count = await FindByCondition(
+                e => e.CompanyId.Equals(companyId), trackChange).CountAsync();
+
+            return new PagedList<Employee>(employees, count, 
+                employeeParameters.PageNumber, employeeParameters.PageSize);
+        }
 
         public void CreateEmployeeForCompany(Guid companyId, Employee employee)
         {
