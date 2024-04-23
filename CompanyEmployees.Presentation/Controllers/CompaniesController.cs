@@ -52,9 +52,6 @@ namespace CompanyEmployees.Presentation.Controllers
         public async Task<IActionResult> CreateCompanyCollection
             ([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
         {
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
-
             var result = await _service.CompanyService
                 .CreateCompanyCollectionAsync(companyCollection);
 
