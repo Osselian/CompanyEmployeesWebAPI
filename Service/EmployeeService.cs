@@ -40,6 +40,8 @@ namespace Service
             EmployeeParameters employeeParameters, 
             bool trackChange)
         {
+            if (!employeeParameters.ValidAgeRange)
+                throw new MaxAgeRangeBadRequestException();
             await CheckIfCompanyExists(companyId, trackChange);
 
             var employeesFromDb = await _repository.Employee
