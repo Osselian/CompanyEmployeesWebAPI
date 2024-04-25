@@ -5,6 +5,7 @@ using Entities.Models;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 using Shared.RequestFeatures;
+using System.Dynamic;
 
 namespace Service
 {
@@ -13,13 +14,18 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
+        private readonly IDataShaper<EmployeeDto> _dataShaper;
 
         public EmployeeService(
-            IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+            IRepositoryManager repository, 
+            ILoggerManager logger, 
+            IMapper mapper,
+            IDataShaper<EmployeeDto> dataShaper)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _dataShaper = dataShaper;
         }
        
         public async Task<EmployeeDto> GetEmployeeAsync(
@@ -34,7 +40,7 @@ namespace Service
             return employeeDto;
         }
 
-        public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> 
+        public async Task<(IEnumerable<ExpandoObject> employees, MetaData metaData)> 
             GetEmployeesAsync(
             Guid companyId, 
             EmployeeParameters employeeParameters, 
@@ -47,8 +53,10 @@ namespace Service
             var employeesFromDb = await _repository.Employee
                 .GetEmployeesAsync(companyId, employeeParameters,trackChange);
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
+            var shapedData = _dataShaper
+                .ShapeData(employeesDto, employeeParameters.Fields);
 
-            return (employees: employeesDto, metaData: employeesFromDb.MetaData);
+            return (employees: shapedData, metaData: employeesFromDb.MetaData);
         }
 
         public async Task<EmployeeDto> CreateEmployeeForCompanyAsync(

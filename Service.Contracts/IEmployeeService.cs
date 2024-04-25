@@ -1,12 +1,13 @@
 ﻿using Entities.Models;
 using Shared.DataTranferObjects;
 using Shared.RequestFeatures;
+using System.Dynamic;
 
 namespace Service.Contracts
 {
     public interface IEmployeeService
     {
-        Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> 
+        Task<(IEnumerable<ExpandoObject> employees, MetaData metaData)> 
             GetEmployeesAsync(
             Guid companyId, EmployeeParameters employeeParameters, bool trackChange);
         
