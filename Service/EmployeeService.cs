@@ -40,7 +40,7 @@ namespace Service
             return employeeDto;
         }
 
-        public async Task<(IEnumerable<ExpandoObject> employees, MetaData metaData)> 
+        public async Task<(IEnumerable<Entity> employees, MetaData metaData)> 
             GetEmployeesAsync(
             Guid companyId, 
             EmployeeParameters employeeParameters, 
