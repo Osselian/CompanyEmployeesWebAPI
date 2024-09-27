@@ -38,6 +38,8 @@ builder.Services.AddControllers(config =>
     .AddCustomCsvFormatter()
     .AddApplicationPart(typeof(AssemblyReference).Assembly);
 
+builder.Services.AddCustomMediaTypes();
+
 var app = builder.Build();
 
 var logger = app.Services.GetService<ILoggerManager>();
