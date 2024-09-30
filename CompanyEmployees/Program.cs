@@ -45,6 +45,8 @@ builder.Services.AddControllers(config =>
 
 builder.Services.AddCustomMediaTypes();
 
+builder.Services.ConfigureVersioning();
+
 var app = builder.Build();
 
 var logger = app.Services.GetService<ILoggerManager>();
