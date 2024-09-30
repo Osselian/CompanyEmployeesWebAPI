@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net.Http.Headers;
+using Microsoft.Net.Http.Headers;
 
 namespace CompanyEmployees.Presentation.ActionFilters
 {
     public class ValidateMediaTypeAttribute : IActionFilter
     {
         public void OnActionExecuted(ActionExecutedContext context)
+        {
+        }
+
+        public void OnActionExecuting(ActionExecutingContext context)
         {
             var acceptHeaderPresent = 
                 context.HttpContext.Request.Headers.ContainsKey("Accept");
@@ -28,10 +32,6 @@ namespace CompanyEmployees.Presentation.ActionFilters
             }
 
             context.HttpContext.Items.Add("AcceptHeaderMediaType", outMediaType);
-        }
-
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
         }
     }
 }
