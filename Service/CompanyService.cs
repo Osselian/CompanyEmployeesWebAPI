@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
-using Entities.Exceptions;
+using Entities.Responses;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -19,20 +19,21 @@ namespace Service
             _mapper = mapper;
         }
 
-        public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
+        public ApiBaseResponse GetAllCompanies(bool trackChanges)
         {
                 var companies = _repository.Company.GetAllCompanies(trackChanges);
                 var companiesDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies);
-                return companiesDtos;
+                return new ApiOkResponse<IEnumerable<CompanyDto>>(companiesDtos);
         }
 
-        public CompanyDto GetCompany(Guid companyId, bool trackChanges)
+        public ApiBaseResponse GetCompany(Guid companyId, bool trackChanges)
         {
             var company = _repository.Company.GetCompany(companyId, trackChanges);
             if (company is null)
-                throw new CompanyNotFoundException(companyId);
+                return new CompanyNotFoundResponse(companyId);
+
             var companyDto = _mapper.Map<CompanyDto>(company);
-            return companyDto;
+            return new ApiOkResponse<CompanyDto>(companyDto);
         }
     }
 }
